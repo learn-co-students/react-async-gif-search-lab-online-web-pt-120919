@@ -12,23 +12,21 @@ class GifListContainer extends Component {
     }
 
     fetchGifs = (query = "dolphin") => {
-        fetch(`https://api.giphy.com/v1/gifs/search?q=${query}&api_key=2zC1azcW6qWDIwiT6W6ZqoVhiK53sr0l`)
+        fetch(`https://api.giphy.com/v1/gifs/search?q=${query}&api_key=2zC1azcW6qWDIwiT6W6ZqoVhiK53sr0l&limit=3`)
         .then(res => res.json())
-        .then(data => this.setState({gifs: data.data.slice(0, 3).map(element => ({url: element.images.original.url}))}))
+        .then(data => {
+            // console.log("data", data)
+            this.setState({gifs: data.data.map(element => ({url: element.images.original.url}))})})
     }
 
-    // componentDidMount() {
-    //     this.fetchGifs()
-    // }
-
-    handleSubmit = (e) => {
-        this.fetchGifs(e.target.value)
+    componentDidMount() {
+        this.fetchGifs()
     }
 
     render() {
         return (
             <div>
-                <GifSearch submitForm={this.handleSubmit}/>
+                <GifSearch submitForm={this.fetchGifs}/>
                 <GifList gifs={this.state.gifs} />
             </div>
         )
