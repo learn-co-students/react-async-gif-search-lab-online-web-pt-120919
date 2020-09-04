@@ -4,37 +4,34 @@ import GifSearch from '../components/GifSearch'
 
 class GifListContainer extends Component {
 
-    state = {
+  constructor() {
+    super()
+    this.state = {
         gifs: []
-    }
-
-    componentDidMount() {
-        this.fetchGifs()
-    }
-
-    // componentDidUpdate() {
-
-    //     console.log("Good job your search worked!")
-    // }
-
-    fetchGifs = (term = "dolphins") => {
-        fetch(`https://api.giphy.com/v1/gifs/search?q=${term}&api_key=dc6zaTOxFJmzC&rating=g&limit=10`)
-            .then(resp => resp.json())
-            .then(data => this.setState({ gifs: data.data }))
-    }
-
-    submitHandler = (searchTerm) => {
-        this.fetchGifs(searchTerm)
-    }
-
-    render() {
-        return (
-            <React.Fragment>
-                <GifSearch submitHandler={this.submitHandler} />
-                <GifList gifs={this.state.gifs} />
-            </React.Fragment>
-        )
     }
 }
 
-export default GifListContainer
+fetchGifs = (query = "dolphin") => {
+  fetch(`https://api.giphy.com/v1/gifs/search?q=${query}&api_key=2zC1azcW6qWDIwiT6W6ZqoVhiK53sr0l&limit=3`)
+  .then(res => res.json())
+  .then(data => {
+      // console.log("data", data)
+      this.setState({gifs: data.data.map(element => ({url: element.images.original.url}))})})
+}
+
+componentDidMount() {
+  this.fetchGifs()
+}
+
+render() {
+  return (
+      <div>
+          <GifSearch submitForm={this.fetchGifs}/>
+          <GifList gifs={this.state.gifs} />
+      </div>
+  )
+}
+}
+
+
+export default GifListContainer; 
