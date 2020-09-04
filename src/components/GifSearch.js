@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { Component} from 'react'
 
-class GifSearch extends React.Component {
+class GifSearch extends Component {
 
     state = {
         searchTerm: ""
