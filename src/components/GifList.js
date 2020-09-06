@@ -1,13 +1,14 @@
-import React from 'react'
+import React from "react";
 
-function GifList(props) {
-    let gifArray = props.gifs.map((gifObj) => <li><img src={gifObj.images.original.url} /></li>)
-    console.log("gif array: ", gifArray)
-    return (
-        <ul>
-            {gifArray}
-        </ul>
-    )
-}
-
-export default GifList
+const GifList = ({gifs}) => {
+  return gifs.length === 0 ? (<h3>No gifs yet</h3>) : 
+  (<ul>
+      {gifs.map(gif => {
+        return (
+          <li>
+            <img src={gif.images.downsized.url} />
+          </li>
+        );
+      })}
+    </ul>);
+};
