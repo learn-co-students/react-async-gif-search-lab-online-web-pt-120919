@@ -8,14 +8,23 @@ class GifListContainer extends Component {
         gifs: []
     }
 
+    render() {
+        return(
+          <div>
+            <GifSearch fetchGIFs={this.fetchGIFs} />
+            <GifList gifs={this.state.gifs} />
+          </div>
+        )
+      }
+
     componentDidMount() {
         this.fetchGifs()
     }
 
-    // componentDidUpdate() {
+     componentDidUpdate() {
 
-    //     console.log("Good job your search worked!")
-    // }
+         console.log("Good job your search worked!")
+     }
 
     fetchGifs = (term = "dolphins") => {
         fetch(`https://api.giphy.com/v1/gifs/search?q=${term}&api_key=dc6zaTOxFJmzC&rating=g&limit=10`)
