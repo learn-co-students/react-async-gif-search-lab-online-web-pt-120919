@@ -28,7 +28,6 @@ class GifListContainer extends Component {
     }
 
     render() {
-        // debugger
         return (
             <React.Fragment>
                 <GifSearch submitHandler={this.submitHandler} />
